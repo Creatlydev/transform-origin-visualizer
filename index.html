@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>transform-origin Visualizer</title>
+
+    <link rel="stylesheet" href="fonts.css">
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/atom-one-dark.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+
+    <script type="module" src="main.js" defer></script>
+
+</head>
+
+<body>
+
+
+
+    <section class="playground">
+        <section class="playground__config">
+            <h2 class="title">Configuracion</h2>
+            <div class="options-box">
+                <div class="group-field">
+                    <span class="subtitle">transform-origin</span>
+                    <div class="field-values">
+                        <div class="field">
+                            <label for="x">X: </label>
+                            <input placeholder="0" value="50" type="number" name="x" id="x">
+                            <select name="x-unit" id="x-unit">
+                                <option value="px">px</option>
+                                <option value="%" selected>%</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label for="y">Y: </label>
+                            <input placeholder="0" value="50" type="number" name="y" id="y">
+                            <select name="y-unit" id="y-unit">
+                                <option value="px">px</option>
+                                <option value="%" selected>%</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group-field">
+                    <span class="subtitle">width | height</span>
+                    <div class="field-values">
+                        <div class="field">
+                            <label for="width">width: </label>
+                            <input value="250" type="number" name="width" id="width">
+                            <span>px</span>
+                        </div>
+
+                        <div class="field">
+                            <label for="y">height: </label>
+                            <input value="250" type="number" name="height" id="height">
+                            <span>px</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- OUTPUT -->
+            <div class="output">
+                <h3 class="subtitle">Output</h3>
+                <pre><code id="css-code" class="language-css">
+.box {
+    width: 250px;
+    height: 250px;
+    transform-origin: 50% 50%;
+}</code></pre>
+            </div>
+        </section>
+
+        <section class="playground__viewver">
+            <div class="shape"></div>
+            <div class="origin">
+                <div class="point"></div>
+            </div>
+        </section>
+    </section>
+
+</body>
+
+</html>

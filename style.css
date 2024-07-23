@@ -1,0 +1,207 @@
+*,
+::before,
+::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: inherit;
+    font: inherit;
+    line-height: 1;
+}
+
+input,
+button,
+select {
+    border: none;
+    background: transparent;
+    box-sizing: border-box;
+}
+
+input:focus,
+select:focus {
+    border: none;
+    outline: none;
+}
+
+body {
+    font-family: 'Recursive', sans-serif;
+    font-weight: 400;
+    background: linear-gradient(to right, #fff 50%, #f2f2f2 50%);
+    min-height: 100vh;
+    color: hsl(0, 0%, 25%);
+}
+
+:root {
+    --x: .5;
+    --y: .5;
+    --side: 250px;
+    --duration: 1500ms;
+    --easing: ease-in-out;
+}
+
+.playground {
+    display: flex;
+    height: 100vh;
+    gap: 1rem;
+}
+
+.playground>* {
+    flex: 1;
+    height: 100%;
+    padding: 1rem;
+}
+
+.playground__viewver {
+    position: relative;
+    display: grid;
+    place-content: center;
+    overflow: hidden;
+}
+
+.shape {
+    animation: rotate 1000ms infinite linear;
+    transition: transform-origin var(--duration) var(--easing);
+    transform-origin: calc(var(--x) * 100%) calc(var(--y) * 100%);
+
+
+    width: var(--side);
+    height: var(--side);
+    background:
+        linear-gradient(315deg, hsl(248, 40%, 50%) 10%, transparent 10%, transparent),
+        linear-gradient(225deg, hsl(348, 40%, 50%) 10%, transparent 10%, transparent),
+        linear-gradient(135deg, hsl(48, 40%, 50%) 10%, transparent 10%, transparent),
+        linear-gradient(45deg, hsl(168, 40%, 50%) 10%, hsl(168, 70%, 50%) 10%, hsl(168, 70%, 50%));
+    position: relative;
+    will-change: transform, transform-origin;
+}
+
+.origin {
+    width: var(--side);
+    height: var(--side);
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px dashed hsl(233, 70%, 50%);
+
+    background: linear-gradient(315deg, hsla(248, 40%, 50%, .2) 10%, transparent 10%, transparent),
+        linear-gradient(225deg, hsla(348, 40%, 50%, .2) 10%, transparent 10%, transparent),
+        linear-gradient(135deg, hsla(48, 40%, 50%, .2) 10%, transparent 10%, transparent),
+        linear-gradient(45deg, hsla(168, 40%, 50%, .2) 10%, transparent 10%, transparent);
+}
+
+.point {
+    --point: 8px;
+    --transform: translate(calc(var(--x) * var(--side)), calc(var(--y) * var(--side)));
+    background: black;
+    width: var(--point);
+    height: var(--point);
+    border-radius: 50%;
+    position: absolute;
+    transform: var(--transform);
+    transition: transform var(--duration) var(--easing);
+    will-change: transform;
+    opacity: .6;
+}
+
+
+
+@keyframes rotate {
+    100% {
+        transform: rotate(360deg)
+    }
+}
+
+
+/* PLAYGROUND CONFIG */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Eliminar controles en Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+input::placeholder {
+    color: hsl(0, 0%, 60%);
+}
+
+.playground__config {
+    display: grid;
+    place-content: center;
+}
+
+.title {
+    margin-bottom: 2rem;
+    text-decoration: underline wavy 1px;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.group-field+.group-field {
+    margin-top: 1.5rem;
+}
+
+.subtitle {
+    font-size: .875rem;
+    line-height: 2;
+}
+
+.group-field {
+    font-size: .875rem;
+}
+
+.field-values {
+    display: flex;
+    width: 350px;
+    height: 2rem;
+    border: 1px solid #bbb;
+    border-radius: 4px 0 0 4px;
+    color: #666;
+    padding-inline: .5rem;
+    gap: 2rem;
+
+    .field {
+        height: 100%;
+        flex: 1;
+        display: flex;
+        align-items: center;
+
+        input {
+            width: 100%;
+            padding: .25rem .5rem;
+            padding-left: .75rem;
+        }
+
+        select {
+            width: 40px;
+        }
+    }
+}
+
+
+.output {
+    margin-top: 3rem;
+}
+
+
+.output .language-css {
+    font-family: monospace;
+    background: hsl(0, 0%, 93%);
+    color: #666;
+    padding: .5rem 1rem 1rem;
+    border-radius: .25rem;
+}
+
+.output .hljs-selector-class {
+    color: hsl(29, 53%, 48%);
+}
+
+.output .hljs-attribute {
+    /* color: #01c2b1; */
+    color: #5a4bb1;
+}
