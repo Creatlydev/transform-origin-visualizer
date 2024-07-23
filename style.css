@@ -168,7 +168,6 @@ input::placeholder {
     border-radius: .25rem;
     color: #666;
     padding-inline: .5rem;
-    /* gap: 2rem; */
 
     .field {
         height: 100%;

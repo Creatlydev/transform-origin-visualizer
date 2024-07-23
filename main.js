@@ -97,11 +97,14 @@ function updateDimensions() {
   }
 }
 
-// Función para manejar el evento de presionar (mouse o toque)
-function onPress(e) {
+function clearIntervals() {
   clearTimeout(autopilot)
   clearInterval(autopilot)
+}
 
+// Función para manejar el evento de presionar (mouse o toque)
+function onPress(e) {
+  clearIntervals()
   const x = e.clientX ?? e.changedTouches[0].clientX
   const y = e.clientY ?? e.changedTouches[0].clientY
 
@@ -126,6 +129,15 @@ function onChange(e) {
   change(xVal, yVal)
 }
 
+// Funcion para manejar el cambios de unidades en el select
+function changeUnit(e) {
+  clearIntervals()
+  change(
+    xValue.value / (xUnit.value === 'px' ? 1 : 100),
+    yValue.value / (yUnit.value === 'px' ? 1 : 100)
+  )
+}
+
 // Resaltado inicial del bloque de salida de código
 hljs.highlightElement(code)
 
@@ -138,6 +150,10 @@ xValue.oninput = function () {
 yValue.oninput = function () {
   this.value = this.value.slice(0, 3)
 }
+
+xUnit.onchange = changeUnit
+
+yUnit.onchange = changeUnit
 
 // Iniciar el autopilot
 initializeAutopilot()
