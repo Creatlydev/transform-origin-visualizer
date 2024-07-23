@@ -168,7 +168,7 @@ input::placeholder {
     border-radius: .25rem;
     color: #666;
     padding-inline: .5rem;
-    gap: 2rem;
+    /* gap: 2rem; */
 
     .field {
         height: 100%;
@@ -186,6 +186,13 @@ input::placeholder {
             width: 40px;
         }
     }
+}
+
+.field__divider {
+    height: 100%;
+    width: 1px;
+    background-color: #bbb;
+    margin-inline: .5rem;
 }
 
 
