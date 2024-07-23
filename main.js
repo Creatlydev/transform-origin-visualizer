@@ -8,7 +8,9 @@ const yValue = document.getElementById('y')
 const xUnit = document.getElementById('x-unit')
 const yUnit = document.getElementById('y-unit')
 const style = document.documentElement.style
-const sizePoint = getComputedStyle(point).getPropertyValue('--point').slice(0, -2)
+const sizePoint = getComputedStyle(point)
+  .getPropertyValue('--point')
+  .slice(0, -2)
 
 let autopilot
 let width = window.innerWidth
@@ -32,12 +34,20 @@ function change(ex, ey) {
   let multiplyY = yIsPercen ? side : 1
   let xXCien = xIsPercen ? 100 : 1
   let yXCien = yIsPercen ? 100 : 1
-  let transformOrigin = `
-    ${Math.round(x * xXCien)}${xUnit.value} ${Math.round(y * yXCien)}${yUnit.value}
-  `
+  let xVal = Math.round(x * xXCien)
+  let yVal = Math.round(y * yXCien)
+  let transformOrigin = `${xVal}${xUnit.value} ${yVal}${yUnit.value}`
   let transformPoint = `
-    ${xIsPercen ? Math.round((x * 100 * side) / sizePoint) + '%' : x + 'px'}, 
-    ${yIsPercen ? Math.round((y * 100 * side) / sizePoint) + '%' : y + 'px'}
+    ${
+      xIsPercen
+        ? Math.round((x * 100 * side) / sizePoint - 50) + '%'
+        : Math.floor(x - sizePoint / 2) + 'px'
+    }, 
+    ${
+      yIsPercen
+        ? Math.round((y * 100 * side) / sizePoint - 50) + '%'
+        : Math.floor(y - sizePoint / 2) + 'px'
+    }
   `
   console.log(transformPoint)
 
@@ -50,6 +60,9 @@ function change(ex, ey) {
     height: 250px;
     transform-origin: ${transformOrigin.trim()};
 }`
+
+  xValue.value = xVal
+  yValue.value = yVal
   // Actualizar resaltado con Highlight.js
   delete code.dataset.highlighted
   hljs.highlightElement(code)
