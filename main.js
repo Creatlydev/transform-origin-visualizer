@@ -46,15 +46,13 @@ function change(ex, ey) {
   // Crear strings de transformación para el origen y el punto
   const transformOrigin = `${xVal}${xUnit.value} ${yVal}${yUnit.value}`
   const transformPoint = `
-    ${
-      xIsPercent
-        ? Math.round((x * 100 * side) / sizePoint - 50) + '%'
-        : Math.floor(x - sizePoint / 2) + 'px'
+    ${xIsPercent
+      ? Math.round((x * 100 * side) / sizePoint - 50) + '%'
+      : Math.floor(x - sizePoint / 2) + 'px'
     }, 
-    ${
-      yIsPercent
-        ? Math.round((y * 100 * side) / sizePoint - 50) + '%'
-        : Math.floor(y - sizePoint / 2) + 'px'
+    ${yIsPercent
+      ? Math.round((y * 100 * side) / sizePoint - 50) + '%'
+      : Math.floor(y - sizePoint / 2) + 'px'
     }
   `
 
@@ -116,22 +114,13 @@ function onPress(e) {
   // ex, ey: siempre se obtendran en pixeles, a continuación se transforma, a procentaje
   // o se mantiene en pixeles segun la unidad de cada eje
   change(
-    xUnit.value === 'px' ? ex : ex / side, 
+    xUnit.value === 'px' ? ex : ex / side,
     yUnit.value === 'px' ? ey : ey / side
   )
 }
 
-// Función para manejar el cambio en los inputs
+// Función para manejar el cambio en los inputs, y selects
 function onChange(e) {
-  clearIntervals()
-  updateDimensions()
-
-  const xVal = xUnit.value === 'px' ? xValue.value : xValue.value
-  const yVal = yUnit.value === 'px' ? yValue.value : yValue.value
-}
-
-// Funcion para manejar el cambios de unidades en el select
-function changeUnit(e) {
   clearIntervals()
   updateDimensions()
 
@@ -140,7 +129,6 @@ function changeUnit(e) {
     yUnit.value === 'px' ? yValue.value : yValue.value / 100
   )
 }
-
 
 // Añadir event listeners
 viewver.addEventListener('mouseup', onPress)
@@ -157,9 +145,9 @@ yValue.oninput = function () {
 }
 
 // Select units events
-xUnit.onchange = changeUnit
+xUnit.onchange = onChange
 
-yUnit.onchange = changeUnit
+yUnit.onchange = onChange
 
 // Resaltado inicial del bloque de salida de código
 hljs.highlightElement(code)

@@ -133,7 +133,7 @@ input[type="number"] {
 }
 
 input::placeholder {
-    color: hsl(0, 0%, 60%);
+    color: hsl(0, 0%, 90%);
 }
 
 .playground__config {
