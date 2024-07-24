@@ -6,6 +6,8 @@ const point = document.querySelector('.point')
 const viewver = document.querySelector('.playground__viewver')
 const xValue = document.getElementById('x')
 const yValue = document.getElementById('y')
+const inputWidth = document.getElementById('width')
+const inputHeight = document.getElementById('height')
 const xUnit = document.getElementById('x-unit')
 const yUnit = document.getElementById('y-unit')
 const style = document.documentElement.style
@@ -100,6 +102,10 @@ function clearIntervals() {
   clearInterval(autopilot)
 }
 
+function limitNumbers() {
+  this.value = this.value.slice(0, 3)
+}
+
 // Función para manejar el evento de presionar (mouse o toque)
 function onPress(e) {
   clearIntervals()
@@ -136,18 +142,25 @@ viewver.addEventListener('touchend', onPress)
 
 // inputs events
 xValue.oninput = function () {
-  this.value = this.value.slice(0, 3)
+  limitNumbers.call(this)
   onChange()
 }
 yValue.oninput = function () {
-  this.value = this.value.slice(0, 3)
+  limitNumbers.call(this)
   onChange()
+}
+
+inputWidth.oninput = function () {
+  limitNumbers.call(this)
+}
+inputHeight.oninput = function () {
+  limitNumbers.call(this)
 }
 
 // Select units events
 xUnit.onchange = onChange
-
 yUnit.onchange = onChange
+
 
 // Resaltado inicial del bloque de salida de código
 hljs.highlightElement(code)
