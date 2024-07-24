@@ -27,10 +27,7 @@ function change(ex, ey) {
   const xIsPercent = xUnit.value === '%'
   const yIsPercent = yUnit.value === '%'
 
-  ex = ex ? (xIsPercent ? ex / side : ex) : ex
-  ey = ey ? (yIsPercent ? ey / side : ey) : ey
-
-  // Calcular nuevas posiciones x e y
+  // verificar si ex y ey son distintos de undefined, caso contraio se genera un numero random
   const x =
     ex ?? (xIsPercent ? Math.random() : Math.floor(Math.random() * (side + 1)))
   const y =
@@ -65,7 +62,7 @@ function change(ex, ey) {
   point.style.transform = `translate(${transformPoint})`
   shape.style.transformOrigin = transformOrigin
 
-  // Actualizar el código CSS mostrado en la página
+  // Actualizar el código CSS mostrado en el bloque de codigo
   code.textContent = `
 .box {
   width: 250px;
@@ -115,47 +112,57 @@ function onPress(e) {
 
   const ex = x - box.left
   const ey = y - box.top
-  change(ex, ey)
+
+  // ex, ey: siempre se obtendran en pixeles, a continuación se transforma, a procentaje
+  // o se mantiene en pixeles segun la unidad de cada eje
+  change(
+    xUnit.value === 'px' ? ex : ex / side, 
+    yUnit.value === 'px' ? ey : ey / side
+  )
 }
 
 // Función para manejar el cambio en los inputs
 function onChange(e) {
-  clearTimeout(autopilot)
-  clearInterval(autopilot)
-
+  clearIntervals()
   updateDimensions()
 
   const xVal = xUnit.value === 'px' ? xValue.value : xValue.value
   const yVal = yUnit.value === 'px' ? yValue.value : yValue.value
-
-  change(xVal, yVal)
 }
 
 // Funcion para manejar el cambios de unidades en el select
 function changeUnit(e) {
   clearIntervals()
+  updateDimensions()
+
   change(
-    (xValue.value * (xUnit.value === 'px' ? 100 : side)) / 100,
-    (yValue.value * (yUnit.value === 'px' ? 100 : side)) / 100
+    xUnit.value === 'px' ? xValue.value : xValue.value / 100,
+    yUnit.value === 'px' ? yValue.value : yValue.value / 100
   )
 }
 
-// Resaltado inicial del bloque de salida de código
-hljs.highlightElement(code)
 
 // Añadir event listeners
 viewver.addEventListener('mouseup', onPress)
 viewver.addEventListener('touchend', onPress)
+
+// inputs events
 xValue.oninput = function () {
   this.value = this.value.slice(0, 3)
+  onChange()
 }
 yValue.oninput = function () {
   this.value = this.value.slice(0, 3)
+  onChange()
 }
 
+// Select units events
 xUnit.onchange = changeUnit
 
 yUnit.onchange = changeUnit
+
+// Resaltado inicial del bloque de salida de código
+hljs.highlightElement(code)
 
 // Iniciar el autopilot
 initializeAutopilot()
