@@ -66,8 +66,10 @@ body {
 
 .shape {
     animation: rotate 1000ms infinite linear;
-    transition: transform-origin var(--duration) var(--easing);
-    transform-origin: calc(var(--x) * 100%) calc(var(--y) * 100%);
+    transition-property: transform-origin, width, height;
+    transition-duration: var(--duration);
+    transition-timing-function: var(--easing);
+    transform-origin: center;
 
 
     width: var(--width);
@@ -78,10 +80,14 @@ body {
         linear-gradient(135deg, hsl(48, 40%, 50%) 10%, transparent 10%, transparent),
         linear-gradient(45deg, hsl(168, 40%, 50%) 10%, hsl(168, 70%, 50%) 10%, hsl(168, 70%, 50%));
     position: relative;
-    will-change: transform, transform-origin;
+    will-change: transform, transform-origin, width, height;
 }
 
 .origin {
+    transition-property: width, height;
+    transition-duration: var(--duration);
+    transition-timing-function: var(--easing);
+    will-change: width, height;
     width: var(--width);
     height: var(--height);
     position: absolute;
@@ -134,7 +140,7 @@ input[type="number"] {
 }
 
 input::placeholder {
-    color: hsl(0, 0%, 90%);
+    color: hsl(0, 0%, 60%);
 }
 
 .playground__config {

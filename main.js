@@ -152,9 +152,11 @@ yValue.oninput = function () {
 
 inputWidth.oninput = function () {
   limitNumbers.call(this)
+  style.setProperty('--width', `${this.value}px`)
 }
 inputHeight.oninput = function () {
   limitNumbers.call(this)
+  style.setProperty('--height', `${this.value}px`)
 }
 
 // Select units events
