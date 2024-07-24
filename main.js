@@ -20,7 +20,8 @@ let autopilot
 let width = window.innerWidth
 let height = window.innerHeight
 let box = origin.getBoundingClientRect()
-let side = box.right - box.left
+let wBox = box.right - box.left
+let hBox = box.bottom - box.top
 
 // Función para cambiar la posición del punto y el origen de transformación de la forma
 function change(ex, ey) {
@@ -29,17 +30,15 @@ function change(ex, ey) {
 
   // verificar si ex y ey son distintos de undefined, caso contraio se genera un numero random
   const x =
-    ex ?? (xIsPercent ? Math.random() : Math.floor(Math.random() * (side + 1)))
+    ex ?? (xIsPercent ? Math.random() : Math.floor(Math.random() * (wBox + 1)))
   const y =
-    ey ?? (yIsPercent ? Math.random() : Math.floor(Math.random() * (side + 1)))
+    ey ?? (yIsPercent ? Math.random() : Math.floor(Math.random() * (hBox + 1)))
 
   // Actualizar variables CSS
   style.setProperty('--x', x)
   style.setProperty('--y', y)
 
   // Calcular los valores de transformación
-  const xMultiplier = xIsPercent ? side : 1
-  const yMultiplier = yIsPercent ? side : 1
   const xVal = Math.round(x * (xIsPercent ? 100 : 1))
   const yVal = Math.round(y * (yIsPercent ? 100 : 1))
 
@@ -47,11 +46,11 @@ function change(ex, ey) {
   const transformOrigin = `${xVal}${xUnit.value} ${yVal}${yUnit.value}`
   const transformPoint = `
     ${xIsPercent
-      ? Math.round((x * 100 * side) / sizePoint - 50) + '%'
+      ? Math.round((x * 100 * wBox) / sizePoint - 50) + '%'
       : Math.floor(x - sizePoint / 2) + 'px'
     }, 
     ${yIsPercent
-      ? Math.round((y * 100 * side) / sizePoint - 50) + '%'
+      ? Math.round((y * 100 * hBox) / sizePoint - 50) + '%'
       : Math.floor(y - sizePoint / 2) + 'px'
     }
   `
@@ -91,7 +90,8 @@ function updateDimensions() {
     box = origin.getBoundingClientRect()
     width = window.innerWidth
     height = window.innerHeight
-    side = box.right - box.left
+    wBox = box.right - box.left
+    hBox = box.bottom - box.top
   }
 }
 
@@ -114,8 +114,8 @@ function onPress(e) {
   // ex, ey: siempre se obtendran en pixeles, a continuación se transforma, a procentaje
   // o se mantiene en pixeles segun la unidad de cada eje
   change(
-    xUnit.value === 'px' ? ex : ex / side,
-    yUnit.value === 'px' ? ey : ey / side
+    xUnit.value === 'px' ? ex : ex / wBox,
+    yUnit.value === 'px' ? ey : ey / hBox
   )
 }
 

@@ -34,7 +34,8 @@ body {
 :root {
     --x: .5;
     --y: .5;
-    --side: 250px;
+    --width: 250px;
+    --height: 250px;
     --duration: 1500ms;
     --easing: ease-in-out;
 }
@@ -69,8 +70,8 @@ body {
     transform-origin: calc(var(--x) * 100%) calc(var(--y) * 100%);
 
 
-    width: var(--side);
-    height: var(--side);
+    width: var(--width);
+    height: var(--height);
     background:
         linear-gradient(315deg, hsl(248, 40%, 50%) 10%, transparent 10%, transparent),
         linear-gradient(225deg, hsl(348, 40%, 50%) 10%, transparent 10%, transparent),
@@ -81,8 +82,8 @@ body {
 }
 
 .origin {
-    width: var(--side);
-    height: var(--side);
+    width: var(--width);
+    height: var(--height);
     position: absolute;
     z-index: 1;
     top: 50%;
@@ -98,7 +99,7 @@ body {
 
 .point {
     --point: 8px;
-    --transform: translate(calc(var(--x) * var(--side)), calc(var(--y) * var(--side)));
+    --transform: translate(calc(var(--x) * var(--width)), calc(var(--y) * var(--height)));
     background: black;
     width: var(--point);
     height: var(--point);
