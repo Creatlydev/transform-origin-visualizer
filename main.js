@@ -27,6 +27,9 @@ function change(ex, ey) {
   const xIsPercent = xUnit.value === '%'
   const yIsPercent = yUnit.value === '%'
 
+  ex = ex ? (xIsPercent ? ex / side : ex) : ex
+  ey = ey ? (yIsPercent ? ey / side : ey) : ey
+
   // Calcular nuevas posiciones x e y
   const x =
     ex ?? (xIsPercent ? Math.random() : Math.floor(Math.random() * (side + 1)))
@@ -110,9 +113,8 @@ function onPress(e) {
 
   updateDimensions()
 
-  const ex = ((x - box.left) / side) * 100
-  const ey = ((y - box.top) / side) * 100
-
+  const ex = x - box.left
+  const ey = y - box.top
   change(ex, ey)
 }
 
@@ -133,8 +135,8 @@ function onChange(e) {
 function changeUnit(e) {
   clearIntervals()
   change(
-    xValue.value / (xUnit.value === 'px' ? 1 : 100),
-    yValue.value / (yUnit.value === 'px' ? 1 : 100)
+    (xValue.value * (xUnit.value === 'px' ? 100 : side)) / 100,
+    (yValue.value * (yUnit.value === 'px' ? 100 : side)) / 100
   )
 }
 
