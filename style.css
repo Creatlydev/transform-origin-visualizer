@@ -247,3 +247,21 @@ input::placeholder {
 .output .hljs-attribute {
     color: #5a4bb1;
 }
+
+
+
+/* INFO OWN */
+.info-own {
+    margin-top: 3.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+    font-size: .875rem;
+}
+
+.info-own .link {
+    font-weight: 500;
+    color: #eb621e;
+    text-decoration: underline wavy 1px currentColor;
+}
