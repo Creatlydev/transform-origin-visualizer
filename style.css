@@ -75,16 +75,14 @@ body {
 
     width: var(--width);
     height: var(--height);
-    background:
-        linear-gradient(315deg, hsl(248, 40%, 50%) 10%, transparent 10%, transparent),
-        linear-gradient(225deg, hsl(348, 40%, 50%) 10%, transparent 10%, transparent),
-        linear-gradient(135deg, hsl(48, 40%, 50%) 10%, transparent 10%, transparent),
-        linear-gradient(45deg, hsl(168, 40%, 50%) 10%, hsl(168, 70%, 50%) 10%, hsl(168, 70%, 50%));
+    background: #444cf7;
     position: relative;
     will-change: transform, transform-origin, width, height;
+
 }
 
 .origin {
+    --sizePoint: 12px;
     transition-property: width, height;
     transition-duration: 800ms;
     transition-timing-function: var(--easing);
@@ -96,19 +94,21 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border: 1px dashed hsl(233, 70%, 50%);
-
-    background: linear-gradient(315deg, hsla(248, 40%, 50%, .2) 10%, transparent 10%, transparent),
-        linear-gradient(225deg, hsla(348, 40%, 50%, .2) 10%, transparent 10%, transparent),
-        linear-gradient(135deg, hsla(48, 40%, 50%, .2) 10%, transparent 10%, transparent),
-        linear-gradient(45deg, hsla(168, 40%, 50%, .2) 10%, transparent 10%, transparent);
+    border: 1px dashed #09f;
+    background-color: #e5e5f7;
+    opacity: 0.8;
+    background-image:
+        linear-gradient(#444cf7 1px, transparent 1px),
+        linear-gradient(to right, #444cf7 1px, #e5e5f7 1px);
+    background-size: var(--sizePoint) var(--sizePoint);
+    background-position: center;
 }
 
 .point {
-    --point: 8px;
+    --point: var(--sizePoint);
     --transform: translate(calc(var(--x) * var(--width)), calc(var(--y) * var(--height)));
     pointer-events: none;
-    background: black;
+    background: rgb(198, 10, 141);
     width: var(--point);
     height: var(--point);
     border-radius: 50%;
@@ -116,7 +116,29 @@ body {
     transform: var(--transform);
     transition: transform var(--duration) var(--easing);
     will-change: transform;
-    opacity: .6;
+    opacity: .8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.point::before {
+    content: "";
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    background: rgb(198, 10, 141);
+    border-radius: 25px;
+    animation: loop 1s 0s infinite;
+}
+
+@keyframes loop {
+    to {
+        background-color: rgba(198, 10, 141, 0);
+        width: 30px;
+        height: 30px;
+    }
 }
 
 
