@@ -24,6 +24,8 @@ let height = window.innerHeight
 let box = origin.getBoundingClientRect()
 let wBox = box.right - box.left
 let hBox = box.bottom - box.top
+style.setProperty('--width', `${wBox}px`)
+style.setProperty('--height', `${hBox}px`)
 
 // Función para cambiar la posición del punto y el origen de transformación de la forma
 function change(ex, ey) {
@@ -89,12 +91,12 @@ function initializeAutopilot() {
 // Función para actualizar dimensiones de la caja
 function updateDimensions() {
   if (window.innerWidth !== width || window.innerHeight !== height) {
-    box = origin.getBoundingClientRect()
     width = window.innerWidth
     height = window.innerHeight
-    wBox = box.right - box.left
-    hBox = box.bottom - box.top
-  }
+  }  
+  box = origin.getBoundingClientRect()
+  wBox = style.getPropertyValue('--width').slice(0, -2)
+  hBox = style.getPropertyValue('--height').slice(0, -2)
 }
 
 function clearIntervals() {
@@ -126,8 +128,8 @@ function onPress(e) {
 }
 
 // Función para manejar el cambio en los inputs, y selects
-function onChange(e) {
-  clearIntervals()
+function onChange(e, clear= true) {
+  if (clear) clearIntervals()
   updateDimensions()
 
   change(
@@ -150,13 +152,17 @@ yValue.oninput = function () {
   onChange()
 }
 
+function setProperty(property, inputElement) {
+  limitNumbers.call(inputElement)
+  style.setProperty(property, `${inputElement.value}px`)
+  onChange(null, false)
+}
+
 inputWidth.oninput = function () {
-  limitNumbers.call(this)
-  style.setProperty('--width', `${this.value}px`)
+  setProperty('--width', this)
 }
 inputHeight.oninput = function () {
-  limitNumbers.call(this)
-  style.setProperty('--height', `${this.value}px`)
+  setProperty('--height', this)
 }
 
 // Select units events

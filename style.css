@@ -61,6 +61,7 @@ body {
     display: grid;
     place-content: center;
     overflow: hidden;
+    height: 100vh;
     background-color: hsl(0, 0%, 90%);
 }
 
@@ -85,7 +86,7 @@ body {
 
 .origin {
     transition-property: width, height;
-    transition-duration: var(--duration);
+    transition-duration: 800ms;
     transition-timing-function: var(--easing);
     will-change: width, height;
     width: var(--width);
@@ -106,6 +107,7 @@ body {
 .point {
     --point: 8px;
     --transform: translate(calc(var(--x) * var(--width)), calc(var(--y) * var(--height)));
+    pointer-events: none;
     background: black;
     width: var(--point);
     height: var(--point);
