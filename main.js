@@ -66,8 +66,8 @@ function change(ex, ey) {
   // Actualizar el código CSS mostrado en el bloque de codigo
   code.textContent = `
 .box {
-  width: 250px;
-  height: 250px;
+  width: ${wBox}px;
+  height: ${hBox}px;
   transform-origin: ${transformOrigin.trim()};
 }`
 
