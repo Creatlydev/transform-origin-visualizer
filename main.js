@@ -139,8 +139,8 @@ function onChange(e, clear= true) {
 }
 
 // Añadir event listeners
-viewver.addEventListener('mouseup', onPress)
-viewver.addEventListener('touchend', onPress)
+origin.addEventListener('mouseup', onPress)
+origin.addEventListener('touchend', onPress)
 
 // inputs events
 xValue.oninput = function () {
